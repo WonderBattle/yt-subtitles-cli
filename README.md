@@ -4,16 +4,67 @@ A minimal Python script to download auto-generated captions from YouTube videos 
 
 ## Installation
 
-1. Clone or navigate to this directory
-2. Install dependencies:
+### Option 1: Using `uv` (Recommended)
+
+[uv](https://github.com/astral-sh/uv) is a fast Python package installer and resolver.
+
+1. Install `uv` (if you don't have it):
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+2. Navigate to the project directory and create a virtual environment:
+```bash
+uv venv
+```
+
+3. Activate the virtual environment:
+```bash
+# On macOS/Linux
+source .venv/bin/activate
+
+# On Windows
+.venv\Scripts\activate
+```
+
+4. Install dependencies:
+```bash
+uv pip install -r requirements.txt
+```
+
+### Option 2: Using Python `venv`
 
 ```bash
+python -m venv .venv
+
+# On macOS/Linux
+source .venv/bin/activate
+
+# On Windows
+.venv\Scripts\activate
+
 pip install -r requirements.txt
 ```
+
+### Option 3: Using DevContainer (Docker)
+
+For a containerized environment, use the included `.devcontainer` setup.
+
+**Prerequisites:** Docker and VS Code with the "Dev Containers" extension.
+
+1. Open the project in VS Code
+2. Click "Reopen in Container" when prompted, or use the command palette:
+```
+Dev Containers: Reopen in Container
+```
+
+The development environment will be automatically set up with all dependencies installed.
 
 ## Usage
 
 ### Basic Usage
+
+Downloads captions in Spanish (default) and saves to `captions/` directory:
 
 ```bash
 python download_captions.py <youtube_url>
@@ -25,34 +76,98 @@ python download_captions.py <youtube_url>
 python download_captions.py <youtube_url> <output_directory>
 ```
 
-## Examples
+### With Custom Language
 
-Download captions from the video and save to default `captions/` directory:
+Specify a language code (ISO 639-1 format):
 
 ```bash
-python download_captions.py "https://youtu.be/HFIwMQkDR4I?list=RDHFIwMQkDR4I"
+python download_captions.py <youtube_url> <output_directory> <language_code>
 ```
 
-Download captions and save to a custom directory:
+## Examples
+
+Download Spanish captions and save to default `captions/` directory:
 
 ```bash
-python download_captions.py "https://youtu.be/HFIwMQkDR4I?list=RDHFIwMQkDR4I" "./my_captions"
+python download_captions.py "https://youtu.be/eAMwDYz6PUE"
+```
+
+Download English captions:
+
+```bash
+python download_captions.py "https://youtu.be/eAMwDYz6PUE" captions en
+```
+
+Download to a custom directory:
+
+```bash
+python download_captions.py "https://youtu.be/eAMwDYz6PUE" ./my_captions es
+```
+
+Download French captions:
+
+```bash
+python download_captions.py "https://youtu.be/eAMwDYz6PUE" ./french_subs fr
 ```
 
 ## Output
 
-The script downloads auto-generated captions in VTT format. Files are saved with the video title as the filename.
+The script downloads auto-generated captions in **both VTT and TXT formats**:
+- **VTT format**: Standard WebVTT subtitle format with timing information
+- **TXT format**: Plain text format with clean captions only (no timing data)
+
+**No video files are downloaded**, only the captions.
+
+Example files:
+- `Kaotiko - Otra Noche.es.vtt` (12 KB)
+- `Kaotiko - Otra Noche.es.txt` (3.3 KB)
 
 ## Features
 
-- Downloads only auto-generated captions (not user-provided ones)
-- Saves captions in VTT format (WebVTT)
-- Creates output directory automatically
-- Provides clear success/error messages
-- Simple and minimal implementation
+- ✓ Downloads only auto-generated captions (not user-provided ones)
+- ✓ Saves captions in **both VTT and TXT formats**
+- ✓ **TXT format**: Clean plain text without timing information
+- ✓ **VTT format**: Standard WebVTT with timestamps for media players
+- ✓ Support for multiple languages (Spanish, English, French, etc.)
+- ✓ Avoids downloading entire playlists (downloads single video only)
+- ✓ **No video files downloaded** - captions only
+- ✓ Creates output directory automatically
+- ✓ Provides clear success/error messages
+- ✓ Simple and minimal implementation
+- ✓ Works with virtual environments (uv or venv)
+- ✓ DevContainer support for isolated development environment
 
 ## Requirements
 
 - Python 3.6+
 - yt-dlp library
-# yt-subtitles-cli
+- Internet connection (for downloading from YouTube)
+
+## Common Language Codes
+
+| Language | Code |
+|----------|------|
+| Spanish  | `es` |
+| English  | `en` |
+| French   | `fr` |
+| German   | `de` |
+| Italian  | `it` |
+| Portuguese | `pt` |
+| Japanese | `ja` |
+| Chinese  | `zh` |
+
+For a complete list, see [ISO 639-1 codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
+
+## Troubleshooting
+
+**Issue: HTTP Error 429 (Too Many Requests)**
+- Wait a few moments and try again
+- This is a rate limiting issue from YouTube
+
+**Issue: No subtitles found**
+- Not all videos have auto-generated captions
+- Check if the video has captions available on YouTube first
+
+**Issue: JavaScript runtime warning**
+- This is a warning but doesn't affect caption downloading
+- Install Node.js to suppress the warning: `apt-get install nodejs` (in containers)
