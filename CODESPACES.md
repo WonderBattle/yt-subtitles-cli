@@ -64,10 +64,11 @@ They will be available in the current session but will be cleared when the Codes
 
 ## Environment Details
 
-- **Image:** Python 3.11
-- **Port:** 8000 (forwarded)
+- **Image:** Python 3.11 (Microsoft Dev Container)
+- **Port:** 8000 (auto-forwarded)
 - **Framework:** FastAPI + Uvicorn
 - **Auto-forwarding:** Enabled with notifications
+- **User:** Root (runs with elevated permissions in container)
 
 ## Extensions Pre-installed
 
