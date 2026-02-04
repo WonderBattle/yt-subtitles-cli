@@ -27,7 +27,7 @@ def vtt_to_txt(vtt_file_path):
         # Remove VTT headers and timing information
         lines = vtt_content.split('\n')
         txt_lines = []
-        skip_next = False
+        seen_lines = set()  # Track seen lines to avoid duplicates
         
         for line in lines:
             # Skip empty lines, WEBVTT header, and metadata
@@ -38,7 +38,6 @@ def vtt_to_txt(vtt_file_path):
             
             # Skip timing lines (contain -->)
             if '-->' in line:
-                skip_next = False
                 continue
             
             # Clean up the line
@@ -56,9 +55,11 @@ def vtt_to_txt(vtt_file_path):
             clean_line = re.sub(r'<\d{2}:\d{2}:\d{2}\.\d{3}>', '', clean_line)
             clean_line = re.sub(r'\[.*?\]', '', clean_line).strip()
             
-            # Add the cleaned subtitle text
+            # Add the cleaned subtitle text only if not a duplicate
             if clean_line and not re.match(r'[\d:\.>]+', clean_line):
-                txt_lines.append(clean_line)
+                if clean_line not in seen_lines:
+                    txt_lines.append(clean_line)
+                    seen_lines.add(clean_line)
         
         # Write to TXT file
         txt_file_path = vtt_file_path.with_suffix('.txt')
