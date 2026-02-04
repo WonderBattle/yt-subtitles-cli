@@ -46,13 +46,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### (No DevContainer)
-
-This project no longer includes DevContainer/Codespaces configuration. Use a local virtual environment (recommended) to run the app.
-
-## Usage
-
-### Option 1: CLI Mode (Command Line)
+## Usage - CLI Mode (Command Line)
 
 The most straightforward way to download captions:
 
@@ -60,9 +54,6 @@ The most straightforward way to download captions:
 python download_captions.py <youtube_url> [output_path] [language_code]
 ```
 
-### CLI only (no web UI)
-
-This repository is trimmed to the minimal CLI tool. Use `download_captions.py` to download captions from the command line — no web server is required.
 
 ### Basic CLI Usage
 
@@ -124,9 +115,6 @@ The script downloads auto-generated captions in **both VTT and TXT formats**:
 
 **No video files are downloaded**, only the captions.
 
-Example files:
-- `Kaotiko - Otra Noche.es.vtt` (12 KB)
-- `Kaotiko - Otra Noche.es.txt` (3.3 KB)
 
 ## Features
 
@@ -163,5 +151,3 @@ Example files:
 | Chinese  | `zh` |
 
 For a complete list, see [ISO 639-1 codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
-
-<!-- Troubleshooting moved out; keep things minimal for local venv usage -->
