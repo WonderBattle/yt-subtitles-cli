@@ -6,7 +6,13 @@
 		"ghcr.io/devcontainers/features/github-cli:1": {}
 	},
 	"postCreateCommand": "pip install -r requirements.txt",
-	"forwardPorts": [],
+	"forwardPorts": [8000],
+	"portsAttributes": {
+		"8000": {
+			"label": "YouTube Subtitles API",
+			"onAutoForward": "notify"
+		}
+	},
 	"remoteUser": "codespace",
 	"customizations": {
 		"vscode": {
@@ -29,8 +35,12 @@
 				"[python]": {
 					"editor.defaultFormatter": "ms-python.python",
 					"editor.formatOnSave": true
-				}
+				},
+				"python.analysis.typeCheckingMode": "basic"
 			}
 		}
-	}
+	},
+	"mounts": [
+		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=/home/codespace/.gitconfig,type=bind,consistency=cached"
+	]
 }

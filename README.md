@@ -62,7 +62,39 @@ The development environment will be automatically set up with all dependencies i
 
 ## Usage
 
-### Basic Usage
+### Option 1: CLI Mode (Command Line)
+
+The most straightforward way to download captions:
+
+```bash
+python download_captions.py <youtube_url> [output_path] [language_code]
+```
+
+### Option 2: Web Interface (FastAPI + Uvicorn)
+
+Launch the web-based interface for easier use:
+
+```bash
+python app.py
+```
+
+Then open your browser to `http://localhost:8000`
+
+**Features:**
+- User-friendly web interface
+- No command-line knowledge required
+- REST API for programmatic access
+- Interactive API documentation at `/docs`
+
+### Option 3: GitHub Codespaces (Cloud-based)
+
+1. Open the project in GitHub Codespaces
+2. The devcontainer will automatically configure and install dependencies
+3. Run: `python app.py`
+4. Click the notification to open the forwarded port
+5. Access the web interface in your browser
+
+### Basic CLI Usage
 
 Downloads captions in Spanish (default) and saves to `captions/` directory:
 
@@ -84,7 +116,31 @@ Specify a language code (ISO 639-1 format):
 python download_captions.py <youtube_url> <output_directory> <language_code>
 ```
 
+## REST API
+
+When running with `python app.py`, the following endpoints are available:
+
+### Web Interface
+- **GET** `/` - Main web interface
+
+### API Endpoints
+- **POST** `/api/download` - Download captions
+  ```json
+  {
+    "youtube_url": "https://youtu.be/...",
+    "language": "es",
+    "output_path": "captions"
+  }
+  ```
+
+- **GET** `/api/status` - Get API status
+- **GET** `/api/health` - Health check
+- **GET** `/docs` - Interactive API documentation (Swagger UI)
+- **GET** `/redoc` - ReDoc API documentation
+
 ## Examples
+
+### CLI Examples
 
 Download Spanish captions and save to default `captions/` directory:
 
@@ -108,6 +164,54 @@ Download French captions:
 
 ```bash
 python download_captions.py "https://youtu.be/eAMwDYz6PUE" ./french_subs fr
+```
+
+### Web Interface Examples
+
+1. **Start the server:**
+```bash
+python app.py
+```
+
+2. **Open in browser:**
+```
+http://localhost:8000
+```
+
+3. **Fill in the form:**
+   - Enter YouTube URL
+   - Select language
+   - Click "Download Captions"
+
+### API Examples
+
+Using `curl`:
+
+```bash
+curl -X POST "http://localhost:8000/api/download" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "youtube_url": "https://youtu.be/eAMwDYz6PUE",
+    "language": "es",
+    "output_path": "captions"
+  }'
+```
+
+Using Python:
+
+```python
+import requests
+
+response = requests.post(
+    "http://localhost:8000/api/download",
+    json={
+        "youtube_url": "https://youtu.be/eAMwDYz6PUE",
+        "language": "es",
+        "output_path": "captions"
+    }
+)
+
+print(response.json())
 ```
 
 ## Output
