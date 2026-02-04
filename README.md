@@ -46,19 +46,9 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Option 3: Using DevContainer (Docker)
+### (No DevContainer)
 
-For a containerized environment, use the included `.devcontainer` setup.
-
-**Prerequisites:** Docker and VS Code with the "Dev Containers" extension.
-
-1. Open the project in VS Code
-2. Click "Reopen in Container" when prompted, or use the command palette:
-```
-Dev Containers: Reopen in Container
-```
-
-The development environment will be automatically set up with all dependencies installed.
+This project no longer includes DevContainer/Codespaces configuration. Use a local virtual environment (recommended) to run the app.
 
 ## Usage
 
@@ -86,13 +76,7 @@ Then open your browser to `http://localhost:8000`
 - REST API for programmatic access
 - Interactive API documentation at `/docs`
 
-### Option 3: GitHub Codespaces (Cloud-based)
-
-1. Open the project in GitHub Codespaces
-2. The devcontainer will automatically configure and install dependencies
-3. Run: `python app.py`
-4. Click the notification to open the forwarded port
-5. Access the web interface in your browser
+<!-- DevContainer and Codespaces instructions removed -->
 
 ### Basic CLI Usage
 
@@ -239,7 +223,7 @@ Example files:
 - ✓ Provides clear success/error messages
 - ✓ Simple and minimal implementation
 - ✓ Works with virtual environments (uv or venv)
-- ✓ DevContainer support for isolated development environment
+ - ✓ Works with virtual environments (uv or venv)
 
 ## Requirements
 
@@ -262,16 +246,4 @@ Example files:
 
 For a complete list, see [ISO 639-1 codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
 
-## Troubleshooting
-
-**Issue: HTTP Error 429 (Too Many Requests)**
-- Wait a few moments and try again
-- This is a rate limiting issue from YouTube
-
-**Issue: No subtitles found**
-- Not all videos have auto-generated captions
-- Check if the video has captions available on YouTube first
-
-**Issue: JavaScript runtime warning**
-- This is a warning but doesn't affect caption downloading
-- Install Node.js to suppress the warning: `apt-get install nodejs` (in containers)
+<!-- Troubleshooting moved out; keep things minimal for local venv usage -->

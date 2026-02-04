@@ -1,45 +1,6 @@
 {
-	"name": "YouTube Subtitles CLI",
+	"name": "YouTube Subtitles CLI (devcontainer removed)",
 	"image": "mcr.microsoft.com/devcontainers/python:3.11",
-	"features": {
-		"ghcr.io/devcontainers/features/git:1": {},
-		"ghcr.io/devcontainers/features/github-cli:1": {}
-	},
-	"postCreateCommand": "pip install -r requirements.txt && python -m pip install --upgrade pip",
-	"forwardPorts": [8000],
-	"portsAttributes": {
-		"8000": {
-			"label": "YouTube Subtitles API",
-			"onAutoForward": "notify"
-		}
-	},
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"ms-python.python",
-				"ms-python.vscode-pylance",
-				"GitHub.copilot",
-				"GitHub.copilot-chat",
-				"GitHub.github-vscode-theme",
-				"ms-vscode.remote-explorer",
-				"ms-vscode-remote.remote-containers",
-				"ms-vscode.makefile-tools",
-				"charliermarsh.ruff"
-			],
-			"settings": {
-				"python.defaultInterpreterPath": "/usr/local/bin/python",
-				"python.linting.enabled": true,
-				"python.linting.pylintEnabled": true,
-				"python.formatting.provider": "black",
-				"[python]": {
-					"editor.defaultFormatter": "ms-python.python",
-					"editor.formatOnSave": true
-				},
-				"python.analysis.typeCheckingMode": "basic"
-			}
-		}
-	},
-	"mounts": [
-		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=/home/codespace/.gitconfig,type=bind,consistency=cached"
-	]
+	"postCreateCommand": "echo 'Devcontainer functionality removed. Use uv/venv locally.'",
+	"forwardPorts": []
 }
