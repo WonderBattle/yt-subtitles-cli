@@ -60,23 +60,9 @@ The most straightforward way to download captions:
 python download_captions.py <youtube_url> [output_path] [language_code]
 ```
 
-### Option 2: Web Interface (FastAPI + Uvicorn)
+### CLI only (no web UI)
 
-Launch the web-based interface for easier use:
-
-```bash
-python app.py
-```
-
-Then open your browser to `http://localhost:8000`
-
-**Features:**
-- User-friendly web interface
-- No command-line knowledge required
-- REST API for programmatic access
-- Interactive API documentation at `/docs`
-
-<!-- DevContainer and Codespaces instructions removed -->
+This repository is trimmed to the minimal CLI tool. Use `download_captions.py` to download captions from the command line — no web server is required.
 
 ### Basic CLI Usage
 
@@ -99,28 +85,6 @@ Specify a language code (ISO 639-1 format):
 ```bash
 python download_captions.py <youtube_url> <output_directory> <language_code>
 ```
-
-## REST API
-
-When running with `python app.py`, the following endpoints are available:
-
-### Web Interface
-- **GET** `/` - Main web interface
-
-### API Endpoints
-- **POST** `/api/download` - Download captions
-  ```json
-  {
-    "youtube_url": "https://youtu.be/...",
-    "language": "es",
-    "output_path": "captions"
-  }
-  ```
-
-- **GET** `/api/status` - Get API status
-- **GET** `/api/health` - Health check
-- **GET** `/docs` - Interactive API documentation (Swagger UI)
-- **GET** `/redoc` - ReDoc API documentation
 
 ## Examples
 
@@ -150,53 +114,7 @@ Download French captions:
 python download_captions.py "https://youtu.be/eAMwDYz6PUE" ./french_subs fr
 ```
 
-### Web Interface Examples
-
-1. **Start the server:**
-```bash
-python app.py
-```
-
-2. **Open in browser:**
-```
-http://localhost:8000
-```
-
-3. **Fill in the form:**
-   - Enter YouTube URL
-   - Select language
-   - Click "Download Captions"
-
-### API Examples
-
-Using `curl`:
-
-```bash
-curl -X POST "http://localhost:8000/api/download" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "youtube_url": "https://youtu.be/eAMwDYz6PUE",
-    "language": "es",
-    "output_path": "captions"
-  }'
-```
-
-Using Python:
-
-```python
-import requests
-
-response = requests.post(
-    "http://localhost:8000/api/download",
-    json={
-        "youtube_url": "https://youtu.be/eAMwDYz6PUE",
-        "language": "es",
-        "output_path": "captions"
-    }
-)
-
-print(response.json())
-```
+Only the CLI usage is supported in this trimmed repo; start with the CLI examples above.
 
 ## Output
 
@@ -223,7 +141,7 @@ Example files:
 - ✓ Provides clear success/error messages
 - ✓ Simple and minimal implementation
 - ✓ Works with virtual environments (uv or venv)
- - ✓ Works with virtual environments (uv or venv)
+ 
 
 ## Requirements
 

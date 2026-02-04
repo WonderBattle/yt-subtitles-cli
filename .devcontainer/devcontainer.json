@@ -1,6 +1,0 @@
-{
-	"name": "YouTube Subtitles CLI (devcontainer removed)",
-	"image": "mcr.microsoft.com/devcontainers/python:3.11",
-	"postCreateCommand": "echo 'Devcontainer functionality removed. Use uv/venv locally.'",
-	"forwardPorts": []
-}
